@@ -6,6 +6,7 @@ export interface INavbar{
     };
     amount:number;
     name:string;
+    dataSet?:string;
     handleChange: (value: ChangeEvent<HTMLInputElement>) => void;
     handleClick : (value: MouseEvent<HTMLButtonElement>)=> void;
 }

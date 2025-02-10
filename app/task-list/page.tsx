@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import SideBar from "@/components/SideBar";
 import NavBar from "@/components/NavBar";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import { toggle } from "@/Interface/toggle";
 
 export default function TaskList(){
     const router = useRouter();
@@ -10,7 +11,7 @@ export default function TaskList(){
         search:"",
     });
 
-    const[toggle, setToggle] = useState<boolean>(false)
+    const[toggle, setToggle] = useState<{[key:string]:boolean}>({})
 
      
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -22,8 +23,17 @@ export default function TaskList(){
         });
     }
 
-    function toggleButton(){
-        setToggle(toggle ? false : true);
+    function toggleButton(event: MouseEvent<HTMLButtonElement>){
+        const name= event.currentTarget.dataset.name;
+
+        if(!name) return;
+        
+        setToggle((prev)=>{
+            const data = {...prev, [name]: prev[name] ? false : true}
+            return data;
+        });
+        console.log("Botão:", name, "Novo estado:", !toggle[name]);
+
     }
     console.log(toggle);
     return(
@@ -38,6 +48,7 @@ export default function TaskList(){
                         handleChange={handleChange}
                         handleClick={toggleButton}
                         name="search"
+                        dataSet="create"
                         value={value}
                     />
                 </div>

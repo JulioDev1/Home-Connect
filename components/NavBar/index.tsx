@@ -23,7 +23,8 @@ export default function NavBar(props:INavbar){
                     type="text"
                 />
                 <Button 
-                    onClick={props.handleClick} 
+                    onClick={props.handleClick}
+                    dataName={props.dataSet} 
                     placeholder="Add new User"
                     imageUrl={PlusCircle}
                     color="bg-black text-white"
