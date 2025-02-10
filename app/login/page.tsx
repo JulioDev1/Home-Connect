@@ -4,8 +4,8 @@ import LoginComponent from "@/components/LoginComponent";
 import { login } from "@/Interface/login";
 import { ChangeEvent, useState } from "react";
 import heroImage from "../../public/Home.png"
-import Logo from "@/public/Logo";
 import { useRouter } from "next/navigation";
+import HeaderComponent from "@/components/HeaderComponent";
 
 export default function Login(){
     const [value, setValue] = useState<login>({
@@ -27,9 +27,7 @@ export default function Login(){
         <section className="h-screen">
             <div className="flex h-full">
                 <section className="w-1/2 flex flex-col items-center justify-center">
-                    <header className="w-full p-2">
-                        <Logo/>
-                    </header>
+                    <HeaderComponent/>
                     <div className="h-full flex items-center p-4">
                         <LoginComponent 
                             handleClick={() => router.push('/task-list')} 
