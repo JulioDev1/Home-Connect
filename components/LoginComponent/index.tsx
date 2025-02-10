@@ -23,7 +23,7 @@ export default function LoginComponent(props:ILoginComponents){
                 type="text"
                 value={props.value.password}               
             />
-            <Button placeholder="Login"/>
+            <Button onClick={props.handleClick} placeholder="Login"/>
         </form>
     )
 }

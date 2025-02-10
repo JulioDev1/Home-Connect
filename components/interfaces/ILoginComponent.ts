@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 
 export interface ILoginComponents {
     value:{
@@ -6,4 +6,5 @@ export interface ILoginComponents {
         password:string;
     };
     handleChange: (value: ChangeEvent<HTMLInputElement>) => void;
+    handleClick : (value: MouseEvent<HTMLButtonElement>)=> void;
 }

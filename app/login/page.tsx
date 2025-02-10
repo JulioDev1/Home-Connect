@@ -5,6 +5,7 @@ import { login } from "@/Interface/login";
 import { ChangeEvent, useState } from "react";
 import heroImage from "../../public/Home.png"
 import Logo from "@/public/Logo";
+import { useRouter } from "next/navigation";
 
 export default function Login(){
     const [value, setValue] = useState<login>({
@@ -12,6 +13,7 @@ export default function Login(){
         password: "",
     });
 
+    const router = useRouter();
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
     
@@ -24,12 +26,15 @@ export default function Login(){
     return (
         <section className="h-screen">
             <div className="flex h-full">
-                <section className="w-1/2 p-5 flex flex-col items-center justify-center">
+                <section className="w-1/2 flex flex-col items-center justify-center">
                     <header className="w-full p-2">
                         <Logo/>
                     </header>
-                    <div className="h-full flex items-center">
-                        <LoginComponent handleChange={handleChange} value={value}/>
+                    <div className="h-full flex items-center p-4">
+                        <LoginComponent 
+                            handleClick={() => router.push('/task-list')} 
+                            handleChange={handleChange} value={value}
+                        />
                     </div>
                 </section>
                 <section className="w-1/2 flex flex-col items-center gap-4 bg-black justify-center p-5">
