@@ -4,6 +4,7 @@ import SideBar from "@/components/SideBar";
 import NavBar from "@/components/NavBar";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { toggle } from "@/Interface/toggle";
+import FormComponent from "@/components/FormComponent";
 
 export default function TaskList(){
     const router = useRouter();
@@ -35,7 +36,6 @@ export default function TaskList(){
         console.log("Botão:", name, "Novo estado:", !toggle[name]);
 
     }
-    console.log(toggle);
     return(
         <section className="h-screen">
             <div className="flex h-full">
@@ -48,10 +48,18 @@ export default function TaskList(){
                         handleChange={handleChange}
                         handleClick={toggleButton}
                         name="search"
-                        dataSet="create"
+                        dataSet="close"
                         value={value}
                     />
                 </div>
+
+                    <FormComponent 
+                        dataName="close"
+                        handleClick={toggleButton}
+                        toggle={toggle["close"]}
+                        handleChange={handleChange}
+                        value=""
+                    />
             </div>
         </section>
     )
