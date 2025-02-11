@@ -5,7 +5,7 @@ export default function HeaderFormComponent(props:navButton){
     return (
         <header className="flex w-full justify-between">
             <h1 className="font-bold text-2xl w-fit">User Creation</h1>
-            <button onClick={props.onClick}>
+            <button onClick={props.onClick} data-name={props.dataName}>
 
                 <Image 
                     alt="close"

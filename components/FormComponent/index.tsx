@@ -66,12 +66,8 @@ export default function FormComponent(props:IFormComponent){
 
   
     function nextform(){
-        if(nextOrPrev === 3){
-            props.handleSubmit({ preventDefault: () => {} } as FormEvent<HTMLFormElement>);
-        }
-
         if (nextOrPrev > 2){
-            
+            props.handleSubmit({ preventDefault: () => {} } as FormEvent<HTMLFormElement>);
             return setNextPrev((next)=> next+=0);
         }
              
@@ -87,13 +83,13 @@ export default function FormComponent(props:IFormComponent){
 
     return(
         <section className={
-            props.toggle ? "w-full h-full z-10 bg-black bg-opacity-5 absolute flex justify-end " 
+            props.toggle ? "w-full h-full z-10 bg-black bg-opacity-5 absolute flex justify-end" 
             : "hidden"
             
         }  >
             <div className="relative p-2 h-full w-96  bg-white bg-opacity-100 transition-all duration-300 flex flex-col justify-between">
                 <form className="flex flex-col w-full items-center gap-3" onSubmit={props.handleSubmit}>
-                <HeaderFormComponent onClick={props.handleClick}/>
+                <HeaderFormComponent dataName={props.dataName} onClick={props.handleClick}/>
                 {
                     filterFieldById?.content.map((i, index)=>
                     (
