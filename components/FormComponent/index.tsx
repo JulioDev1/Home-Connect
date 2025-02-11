@@ -2,7 +2,7 @@ import Button from "../Button";
 import Input from "../Input";
 import { IFormComponent } from "../interfaces/IFormComponent";
 import next from "../../public/next.png";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import NavButton from "../NavButton";
 import HeaderFormComponent from "../HeaderFormComponent";
 
@@ -66,7 +66,12 @@ export default function FormComponent(props:IFormComponent){
 
   
     function nextform(){
+        if(nextOrPrev === 3){
+            props.handleSubmit({ preventDefault: () => {} } as FormEvent<HTMLFormElement>);
+        }
+
         if (nextOrPrev > 2){
+            
             return setNextPrev((next)=> next+=0);
         }
              
@@ -75,7 +80,7 @@ export default function FormComponent(props:IFormComponent){
 
     function prevForm(){
         if (nextOrPrev < 2){
-            return setNextPrev((next)=> next+=0);
+            return setNextPrev((next)=> next+=0) ;
         }        
         return setNextPrev((next)=> next -=1);
     }
@@ -98,7 +103,7 @@ export default function FormComponent(props:IFormComponent){
                             onChange={props.handleChange}
                             name={i.name}
                             label={i.label}
-                            value={props.value}
+                            value={props.value[i.name as keyof typeof props.value]}
                             placeholder={i.placeholder}
                             type="text"
                         />

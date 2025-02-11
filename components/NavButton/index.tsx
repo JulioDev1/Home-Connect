@@ -1,6 +1,4 @@
-import { button } from "@/Interface/button";
 import { navButton } from "@/Interface/navButton";
-import Next from "@/public/Next";
 
 export default function NavButton(props:navButton){
 

@@ -2,23 +2,51 @@
 import { useRouter } from "next/navigation";
 import SideBar from "@/components/SideBar";
 import NavBar from "@/components/NavBar";
-import { ChangeEvent, MouseEvent, useState } from "react";
-import { toggle } from "@/Interface/toggle";
+import { ChangeEvent, MouseEvent, useState, FormEvent } from "react";
 import FormComponent from "@/components/FormComponent";
+import TableComponent from "@/components/TableComponent";
+import { Table } from "@/Interface/Table";
 
 export default function TaskList(){
     const router = useRouter();
+    const [data, setData] = useState<Table>({
+        name:"",
+        email:"",
+        cpf:"",
+        number:"",
+        location:"",
+    });
     const [value, setValue] = useState({
         search:"",
     });
-
     const[toggle, setToggle] = useState<{[key:string]:boolean}>({})
+    const[table, setTable] = useState<Table[]>([]);
 
+
+    function handleAddSubmit(e:FormEvent<HTMLFormElement>){
+        e.preventDefault();
+
+        setTable([...table, data]);
+    
+        Object.fromEntries(Object.keys(data).map((d)=> ["", d]));
+    }
+
+    console.log(table);
      
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         
         setValue((prev) => {
+            const data = { ...prev, [name]: value };
+            return data;
+        });
+    }
+    function handleChangeForm(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target;
+        
+        console.log(data);
+        
+        setData((prev) => {
             const data = { ...prev, [name]: value };
             return data;
         });
@@ -41,7 +69,7 @@ export default function TaskList(){
             <div className="flex h-full">
 
                 <SideBar onClick={() => router.push("/task-list")}/>
-                <div className="p-2 w-full">
+                <div className="p-2 w-full flex flex-col">
 
                     <NavBar
                         amount={10}
@@ -51,15 +79,17 @@ export default function TaskList(){
                         dataSet="close"
                         value={value}
                     />
+                    <TableComponent/>
                 </div>
 
-                    <FormComponent 
-                        dataName="close"
-                        handleClick={toggleButton}
-                        toggle={toggle["close"]}
-                        handleChange={handleChange}
-                        value=""
-                    />
+                <FormComponent 
+                    handleClick={toggleButton}
+                    handleSubmit={handleAddSubmit}
+                    handleChange={handleChangeForm}
+                    value={data}
+                    dataName="close"
+                    toggle={toggle["close"]}
+                />
             </div>
         </section>
     )
