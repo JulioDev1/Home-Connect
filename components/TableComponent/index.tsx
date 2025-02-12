@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Delete from "../../public/Trash.png";
 import Edit from "../../public/PencilSimple.png";
+import { Table } from "@/Interface/Table";
 
-export default function TableComponent(){
+interface ArrayTable {
+  data:Table[];
+}
+export default function TableComponent(prop:ArrayTable){
 
     return(
       <table className="min-w-full bg-white rounded-t-xl  shadow-md">
@@ -19,30 +23,34 @@ export default function TableComponent(){
           </tr>
         </thead>
         <tbody className="text-gray-600 text-sm font-light">
-
-            <tr
-              className="border-b border-gray-200 bg-gray-100 hover:bg-gray-100"
-            >
-              <td className="  h-10 px-6 text-left">ficName</td>
-              <td className="  h-10 px-6 text-left">Cpf</td>
-              <td className="  h-10 px-6 text-left">ficPhone</td>
-              <td className="  h-10 px-6 text-left">ficEmail</td>
-              <td className="  h-10 px-6 text-left">Location</td>
-              <td className="h-10 px-6 text-center">
-                <button className="bg-none">
-                  <Image
-                    src={Edit}
-                    alt="delete"
-                  />
-                </button>
-                <button className="bg-none">
-                  <Image
-                    src={Delete}
-                    alt="delete"
-                  />
-                </button>
-              </td>
-            </tr>
+          {
+            prop.data.map((t, index)=>(
+              <tr
+                className="border-b border-gray-200 bg-gray-100 hover:bg-gray-100"
+                key={index}
+              >
+                <td className="h-10 px-6 text-left">{t.name}</td>
+                <td className="h-10 px-6 text-left">{t.cpf}</td>
+                <td className="h-10 px-6 text-left">{t.number}</td>
+                <td className="h-10 px-6 text-left">{t.email}</td>
+                <td className="h-10 px-6 text-left">{t.location}</td>
+                <td className="h-10 px-6 text-center">
+                  <button className="bg-none">
+                    <Image
+                      src={Edit}
+                      alt="delete"
+                    />
+                  </button>
+                  <button className="bg-none">
+                    <Image
+                      src={Delete}
+                      alt="delete"
+                    />
+                  </button>
+                </td>
+              </tr>
+            ))
+          }        
         </tbody>
       </table>
   

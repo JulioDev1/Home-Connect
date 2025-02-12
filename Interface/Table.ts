@@ -1,4 +1,5 @@
 export interface Table{
+    id?: string;
     name:string;
     email:string;
     cpf:string;

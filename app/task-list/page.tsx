@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useRouter } from "next/navigation";
 import SideBar from "@/components/SideBar";
 import NavBar from "@/components/NavBar";
@@ -41,6 +41,7 @@ export default function TaskList(){
             return data;
         });
     }
+      
     function handleChangeForm(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         
@@ -61,7 +62,6 @@ export default function TaskList(){
             const data = {...prev, [name]: prev[name] ? false : true}
             return data;
         });
-        console.log("Botão:", name, "Novo estado:", !toggle[name]);
 
     }
     return(
@@ -79,7 +79,7 @@ export default function TaskList(){
                         dataSet="close"
                         value={value}
                     />
-                    <TableComponent/>
+                    <TableComponent data={table}/>
                 </div>
 
                 <FormComponent 

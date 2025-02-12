@@ -2,7 +2,7 @@ import Button from "../Button";
 import Input from "../Input";
 import { IFormComponent } from "../interfaces/IFormComponent";
 import next from "../../public/next.png";
-import { FormEvent, useState } from "react";
+import { FormEvent, MouseEvent, useState } from "react";
 import NavButton from "../NavButton";
 import HeaderFormComponent from "../HeaderFormComponent";
 
@@ -32,6 +32,12 @@ export default function FormComponent(props:IFormComponent){
                     name:"cpf", 
                     label:"Cpf",
                     placeholder:"Cpf",
+                    type:"text"
+                },
+                {
+                    name:"id", 
+                    label:"Id",
+                    placeholder:"id",
                     type:"text"
                 },
 
@@ -88,12 +94,11 @@ export default function FormComponent(props:IFormComponent){
             
         }  >
             <div className="relative p-2 h-full w-96  bg-white bg-opacity-100 transition-all duration-300 flex flex-col justify-between">
-                <form className="flex flex-col w-full items-center gap-3" onSubmit={props.handleSubmit}>
                 <HeaderFormComponent dataName={props.dataName} onClick={props.handleClick}/>
+                <form className="flex flex-col w-full items-center gap-3" onSubmit={props.handleSubmit}>
                 {
                     filterFieldById?.content.map((i, index)=>
-                    (
-                    
+                    (                 
                         <Input
                             key={index}
                             onChange={props.handleChange}
