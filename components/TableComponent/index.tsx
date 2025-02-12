@@ -29,7 +29,7 @@ export default function TableComponent(prop:ArrayTable){
                 className="border-b border-gray-200 bg-gray-100 hover:bg-gray-100"
                 key={index}
               >
-                <td className="h-10 px-6 text-left">{t.name}</td>
+                <td className="h-10 px-6 text-left">{t.name}{t.id}</td>
                 <td className="h-10 px-6 text-left">{t.cpf}</td>
                 <td className="h-10 px-6 text-left">{t.number}</td>
                 <td className="h-10 px-6 text-left">{t.email}</td>

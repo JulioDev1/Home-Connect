@@ -72,7 +72,7 @@ export default function TaskList(){
                 <div className="p-2 w-full flex flex-col">
 
                     <NavBar
-                        amount={10}
+                        amount={table.length}
                         handleChange={handleChange}
                         handleClick={toggleButton}
                         name="search"
