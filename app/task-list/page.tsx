@@ -6,6 +6,7 @@ import { ChangeEvent, MouseEvent, useState, FormEvent } from "react";
 import FormComponent from "@/components/FormComponent";
 import TableComponent from "@/components/TableComponent";
 import { Table } from "@/Interface/Table";
+import { ITableProps } from "@/components/interfaces/ITableProps";
 
 export default function TaskList(){
     const router = useRouter();
@@ -15,23 +16,26 @@ export default function TaskList(){
         cpf:"",
         number:"",
         location:"",
+
     });
     const [value, setValue] = useState({
         search:"",
     });
     const[toggle, setToggle] = useState<{[key:string]:boolean}>({})
+    
     const[table, setTable] = useState<Table[]>([]);
+    const [select, setSelected] = useState<string[]>([])    
 
 
     function handleAddSubmit(e:FormEvent<HTMLFormElement>){
         e.preventDefault();
 
-        setTable([...table, data]);
-    
+        
         Object.fromEntries(Object.keys(data).map((d)=> ["", d]));
+        
+        setTable([...table, data]);
     }
 
-    console.log(table);
      
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
@@ -45,12 +49,16 @@ export default function TaskList(){
     function handleChangeForm(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         
-        console.log(data);
-        
         setData((prev) => {
             const data = { ...prev, [name]: value };
             return data;
         });
+    }
+
+    function handleSelect(selectedId:string[])
+    {
+        setSelected(selectedId)      
+        console.log(select)
     }
 
     function toggleButton(event: MouseEvent<HTMLButtonElement>){
@@ -64,12 +72,13 @@ export default function TaskList(){
         });
 
     }
+
     return(
         <section className="h-screen">
             <div className="flex h-full">
 
                 <SideBar onClick={() => router.push("/task-list")}/>
-                <div className="p-2 w-full flex flex-col">
+                <div className="p-2 w-full flex flex-col items-center">
 
                     <NavBar
                         amount={table.length}
@@ -79,7 +88,10 @@ export default function TaskList(){
                         dataSet="close"
                         value={value}
                     />
-                    <TableComponent data={table}/>
+                    <TableComponent
+                        onSelectionChange={handleSelect}
+                        data={table}
+                    />
                 </div>
 
                 <FormComponent 

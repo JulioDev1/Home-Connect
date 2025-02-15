@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export interface Table{
     id?: string;
     name:string;
@@ -5,4 +7,5 @@ export interface Table{
     cpf:string;
     number:string;
     location:string;
+  
 }

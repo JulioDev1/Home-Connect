@@ -94,23 +94,26 @@ export default function FormComponent(props:IFormComponent){
             
         }  >
             <div className="relative p-2 h-full w-96  bg-white bg-opacity-100 transition-all duration-300 flex flex-col justify-between">
-                <HeaderFormComponent dataName={props.dataName} onClick={props.handleClick}/>
-                <form className="flex flex-col w-full items-center gap-3" onSubmit={props.handleSubmit}>
-                {
-                    filterFieldById?.content.map((i, index)=>
-                    (                 
-                        <Input
-                            key={index}
-                            onChange={props.handleChange}
-                            name={i.name}
-                            label={i.label}
-                            value={props.value[i.name as keyof typeof props.value]}
-                            placeholder={i.placeholder}
-                            type="text"
-                        />
-                    ))
-                }
-                </form>
+                <div>
+                    <HeaderFormComponent dataName={props.dataName} onClick={props.handleClick}/>
+                    <form className="flex flex-col w-full items-center gap-3" onSubmit={props.handleSubmit}>
+                    {
+                        filterFieldById?.content.map((i, index)=>
+                        (                 
+                            <Input
+                                key={index}
+                                onChange={props.handleChange}
+                                name={i.name}
+                                label={i.label}
+                                value={props.value[i.name as keyof typeof props.value]}
+                                placeholder={i.placeholder}
+                                type="text"
+                                />
+                            ))
+                        }
+                    </form>
+                </div>
+
                 <div className="flex items-center justify-center w-full gap-3 h-10 g-4">
                     <NavButton 
                         onClick={prevForm} 

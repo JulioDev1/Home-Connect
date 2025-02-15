@@ -1,24 +1,40 @@
 import Image from "next/image";
 import Delete from "../../public/Trash.png";
 import Edit from "../../public/PencilSimple.png";
+import { ITableProps } from "../interfaces/ITableProps";
 import { Table } from "@/Interface/Table";
+import { ChangeEvent, useState } from "react";
+
 
 interface ArrayTable {
   data:Table[];
+  onSelectionChange?:(selectedId:string[]) => void;
 }
 export default function TableComponent(prop:ArrayTable){
+    const [select, setSelected] = useState<string[]>([])    
+
+    function handleCheckBoxChange(event: ChangeEvent<HTMLInputElement>)
+    {
+      
+      const {checked, id } = event.target;
+     
+      setSelected((prev)=> checked ? [...prev, id] : prev.filter((item)=> item !== id));
+      
+    }
+    console.log(select);
 
     return(
-      <table className="min-w-full bg-white rounded-t-xl  shadow-md">
+      <table className="w-11/12 bg-white rounded-t-xl  shadow-md">
         <thead>
           <tr className="bg-white  text-gray-500  text-sm font-medium leading-normal">
+            <th className="h-10 px-6 text-left">
+              <input className="size-4 border border-gray-500 rounded-2xl" type="checkbox"/> 
+            </th>
             <th className="h-10 px-6 text-left">Nome & Id</th>
             <th className="h-10 px-6 text-left">Cpf</th>
             <th className="h-10 px-6 text-left">Phone Number</th>
             <th className="h-10 px-6 text-left">Email</th>
             <th className="h-10 px-6 text-left">Location</th>
-
-
             <th className="h-10 px-6 text-center"></th>
           </tr>
         </thead>
@@ -27,14 +43,25 @@ export default function TableComponent(prop:ArrayTable){
             prop.data.map((t, index)=>(
               <tr
                 className="border-b border-gray-200 bg-gray-100 hover:bg-gray-100"
-                key={index}
+                key={t.id || index}
               >
-                <td className="h-10 px-6 text-left">{t.name}{t.id}</td>
-                <td className="h-10 px-6 text-left">{t.cpf}</td>
-                <td className="h-10 px-6 text-left">{t.number}</td>
-                <td className="h-10 px-6 text-left">{t.email}</td>
-                <td className="h-10 px-6 text-left">{t.location}</td>
-                <td className="h-10 px-6 text-center">
+                <td className="h-10 px-6">
+                  <input 
+                    className="size-4" 
+                    type="checkbox" 
+                    key={index}
+                    onChange={handleCheckBoxChange} 
+                    checked ={select.includes(String(t.id))}
+                    value={t.id} 
+                    id={t.id}
+                  />
+                </td>
+                <td className="h-10 px-6 font-semibold text-black text-left">{t.name}<td className="font-normal text-gray-700">{t.id}</td></td>
+                <td className="h-10 px-6 font-semibold text-black text-left">{t.cpf}</td>
+                <td className="h-10 px-6 font-semibold text-black text-left">{t.number}</td>
+                <td className="h-10 px-6 font-semibold text-black text-left">{t.email}</td>
+                <td className="h-10 px-6 font-semibold text-black text-left">{t.location}</td>
+                <td className="h-10 px-6 font-semibold text-black text-center">
                   <button className="bg-none">
                     <Image
                       src={Edit}
