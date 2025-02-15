@@ -1,34 +1,24 @@
 import Image from "next/image";
 import Delete from "../../public/Trash.png";
 import Edit from "../../public/PencilSimple.png";
-import { ITableProps } from "../interfaces/ITableProps";
 import { Table } from "@/Interface/Table";
 import { ChangeEvent, useState } from "react";
 
 
 interface ArrayTable {
   data:Table[];
+  handleCheckBoxChange: (event :ChangeEvent<HTMLInputElement>)=> void;
   onSelectionChange?:(selectedId:string[]) => void;
+  select:string[];
 }
 export default function TableComponent(prop:ArrayTable){
-    const [select, setSelected] = useState<string[]>([])    
-
-    function handleCheckBoxChange(event: ChangeEvent<HTMLInputElement>)
-    {
-      
-      const {checked, id } = event.target;
-     
-      setSelected((prev)=> checked ? [...prev, id] : prev.filter((item)=> item !== id));
-      
-    }
-    console.log(select);
-
+    
     return(
       <table className="w-11/12 bg-white rounded-t-xl  shadow-md">
         <thead>
           <tr className="bg-white  text-gray-500  text-sm font-medium leading-normal">
             <th className="h-10 px-6 text-left">
-              <input className="size-4 border border-gray-500 rounded-2xl" type="checkbox"/> 
+              <input className="size-4 border border-gray-500 rounded-2xl focus:ring-black" type="checkbox"/> 
             </th>
             <th className="h-10 px-6 text-left">Nome & Id</th>
             <th className="h-10 px-6 text-left">Cpf</th>
@@ -47,11 +37,11 @@ export default function TableComponent(prop:ArrayTable){
               >
                 <td className="h-10 px-6">
                   <input 
-                    className="size-4" 
+                    className="size-4 rounded-md accent-black" 
                     type="checkbox" 
                     key={index}
-                    onChange={handleCheckBoxChange} 
-                    checked ={select.includes(String(t.id))}
+                    onChange={prop.handleCheckBoxChange} 
+                    checked ={prop.select.includes(String(t.id))}
                     value={t.id} 
                     id={t.id}
                   />

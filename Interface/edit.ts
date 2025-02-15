@@ -1,8 +1,6 @@
 import { MouseEvent } from "react";
 
-export interface navButton{
-    placeholder?:string;
-    dataName?:string;
-    title?:string;
+export interface edit{
     onClick:(value: MouseEvent<HTMLButtonElement>)=> void;
+    dataName:string;
 }

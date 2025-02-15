@@ -6,7 +6,9 @@ import { ChangeEvent, MouseEvent, useState, FormEvent } from "react";
 import FormComponent from "@/components/FormComponent";
 import TableComponent from "@/components/TableComponent";
 import { Table } from "@/Interface/Table";
-import { ITableProps } from "@/components/interfaces/ITableProps";
+import OptionComponent from "@/components/OptionsComponent";
+import MainContainer from "@/components/MainContainer";
+import PageSection from "@/components/PageSection";
 
 export default function TaskList(){
     const router = useRouter();
@@ -55,10 +57,12 @@ export default function TaskList(){
         });
     }
 
-    function handleSelect(selectedId:string[])
+    function handleCheckBoxChange(event: ChangeEvent<HTMLInputElement>)
     {
-        setSelected(selectedId)      
-        console.log(select)
+      
+      const {checked, id } = event.target;
+     
+      setSelected((prev)=> checked ? [...prev, id] : prev.filter((item)=> item !== id));   
     }
 
     function toggleButton(event: MouseEvent<HTMLButtonElement>){
@@ -72,13 +76,12 @@ export default function TaskList(){
         });
 
     }
-
+    console.log(select);
     return(
-        <section className="h-screen">
-            <div className="flex h-full">
-
+        <PageSection>
+            <MainContainer>
                 <SideBar onClick={() => router.push("/task-list")}/>
-                <div className="p-2 w-full flex flex-col items-center">
+                <div className="p-2 w-full flex flex-col items-center gap-4">
 
                     <NavBar
                         amount={table.length}
@@ -88,8 +91,11 @@ export default function TaskList(){
                         dataSet="close"
                         value={value}
                     />
+                
+                    <OptionComponent amount={select.length} />
                     <TableComponent
-                        onSelectionChange={handleSelect}
+                        select={select}
+                        handleCheckBoxChange={handleCheckBoxChange}
                         data={table}
                     />
                 </div>
@@ -102,7 +108,7 @@ export default function TaskList(){
                     dataName="close"
                     toggle={toggle["close"]}
                 />
-            </div>
-        </section>
+            </MainContainer>
+        </PageSection>
     )
 }
