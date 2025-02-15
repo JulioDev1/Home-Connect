@@ -1,8 +1,6 @@
-import Button from "../Button";
 import Input from "../Input";
 import { IFormComponent } from "../interfaces/IFormComponent";
-import next from "../../public/next.png";
-import { FormEvent, MouseEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import NavButton from "../NavButton";
 import HeaderFormComponent from "../HeaderFormComponent";
 import SideSectionComponent from "../SideSectionComponent";

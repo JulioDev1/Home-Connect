@@ -5,7 +5,7 @@ import PlusCircle from "../../public/add.png";
 
 export default function NavBar(props:INavbar){
     return (
-        <header className="w-11/12  flex h-16 justify-between mt-5">
+        <header className="w-full  flex h-16 justify-between">
             <h1 className="flex gap-2 items-center font-bold text-3xl">
                 Users 
                 {

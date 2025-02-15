@@ -9,6 +9,7 @@ import { Table } from "@/Interface/Table";
 import OptionComponent from "@/components/OptionsComponent";
 import MainContainer from "@/components/MainContainer";
 import PageSection from "@/components/PageSection";
+import EditComponent from "@/components/EditComponent";
 
 export default function TaskList(){
     const router = useRouter();
@@ -76,12 +77,11 @@ export default function TaskList(){
         });
 
     }
-    console.log(select);
     return(
         <PageSection>
             <MainContainer>
                 <SideBar onClick={() => router.push("/task-list")}/>
-                <div className="p-2 w-full flex flex-col items-center gap-4">
+                <div className="px-8 w-full mt-16 flex flex-col items-center gap-5">
 
                     <NavBar
                         amount={table.length}
@@ -91,15 +91,22 @@ export default function TaskList(){
                         dataSet="close"
                         value={value}
                     />
-                
-                    <OptionComponent amount={select.length} />
+                    <OptionComponent 
+                        onClickEdit={toggleButton} 
+                        dataNameEdit="edit-open" 
+                        amount={select.length} 
+                    />
                     <TableComponent
                         select={select}
                         handleCheckBoxChange={handleCheckBoxChange}
                         data={table}
                     />
                 </div>
-
+                <EditComponent
+                    onClick={toggleButton}
+                    toggle={toggle["edit-open"]}
+                    dataName="edit-open"
+                />
                 <FormComponent 
                     handleClick={toggleButton}
                     handleSubmit={handleAddSubmit}

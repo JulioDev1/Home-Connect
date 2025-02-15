@@ -4,13 +4,12 @@ import SideSectionComponent from "../SideSectionComponent";
 
 export default function EditComponent(props:edit){
     return (
-        <SideSectionComponent  toggle={false}>
+        <SideSectionComponent  toggle={props.toggle}>
             <HeaderFormComponent 
                 onClick={props.onClick} 
                 dataName={props.dataName} 
                 title="Edit User"
             />
-            
         </SideSectionComponent>
     )
 }
