@@ -11,6 +11,8 @@ import MainContainer from "@/components/MainContainer";
 import PageSection from "@/components/PageSection";
 import EditComponent from "@/components/EditComponent";
 import MainContent from "@/components/MainContent";
+import ModalComponent from "@/components/ModalComponent";
+import Trash from "@/public/Trash";
 
 export default function TaskList() {
     const router = useRouter();
@@ -118,6 +120,7 @@ export default function TaskList() {
         setTable(updatedTable);
         setSelected([]);
     }
+    
 
     return (
         <PageSection>
@@ -135,8 +138,9 @@ export default function TaskList() {
                     />
                     <OptionComponent
                         onClickEdit={handleAddRowSelected}
-                        onClickDelete={handleDelete}
+                        onClickDelete={toggleButton}
                         dataNameEdit="edit-open"
+                        dataNameDelete="delete-open"
                         amount={select.length}
                     />
                     <TableComponent
@@ -145,6 +149,14 @@ export default function TaskList() {
                         data={table}
                     />
                 </MainContent>
+                <ModalComponent
+                    amount={select.length}
+                    toggle={toggle["delete-open"]}
+                    dataName="delete-open"
+                    onClick={handleDelete}
+                    onClose={toggleButton}
+                    children={<Trash height={20} width={30} />}   
+                />
                 <EditComponent
                     onClick={toggleButton}
                     value={selectAction}
