@@ -13,6 +13,7 @@ import EditComponent from "@/components/EditComponent";
 import MainContent from "@/components/MainContent";
 import ModalComponent from "@/components/ModalComponent";
 import Trash from "@/public/Trash";
+import Complete from "@/public/Complete";
 
 export default function TaskList() {
     const router = useRouter();
@@ -114,9 +115,9 @@ export default function TaskList() {
 
     }
 
-    function handleDelete() {
+    function handleDelete(event:MouseEvent<HTMLButtonElement>) {
+        toggleButton(event);
         const updatedTable = table.filter((item) => !select.includes(item.id));
-
         setTable(updatedTable);
         setSelected([]);
     }

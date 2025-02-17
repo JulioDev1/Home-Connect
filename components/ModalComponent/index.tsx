@@ -31,7 +31,7 @@ export default function ModalComponent(props: IModalComponent) {
                     </div>
                     <div className="flex justify-center gap-2 w-full">
                         <button data-name={props.dataName} onClick={props.onClose} className="w-full font-bold rounded-md border border-gray-200 h-11">Cancel</button>
-                        <button className="bg-rose-600 rounded-md w-full h-11 text-white">Delete</button>
+                        <button data-name={props.dataName} onClick={props.onClick} className="bg-rose-600 rounded-md w-full h-11 text-white">Delete {props.amount} items</button>
                     </div>
                 </nav>
             </div>
