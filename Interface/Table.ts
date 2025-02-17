@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 export interface Table{
-    id?: string;
+    id: string;
     name:string;
     email:string;
     cpf:string;

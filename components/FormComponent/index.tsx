@@ -96,7 +96,7 @@ export default function FormComponent(props: IFormComponent) {
                         (
                             <Input
                                 key={index}
-                                onChange={props.handleChange}
+                                onChange={(e)=>props.handleChange(e)}
                                 name={i.name}
                                 label={i.label}
                                 value={props.value[i.name as keyof typeof props.value]}
