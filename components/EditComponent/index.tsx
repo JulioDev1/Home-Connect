@@ -51,7 +51,7 @@ export default function EditComponent(props: edit) {
                     dataName={props.dataName}
                     title="Edit User"
                 />
-                <form className="flex flex-col gap-8" action="">{
+                <form onSubmit={props.handleSubmit} className="flex flex-col gap-8" action="">{
                     props.value.map((form, index)=>(
                     <div key={index}>
                     {
@@ -68,6 +68,7 @@ export default function EditComponent(props: edit) {
                     }
                     </div>
                 ))}
+                <button className="bg-blue-500 text-white p-2 rounded-md">Submit</button>
                 </form>
             </div>
         </SideSectionComponent>

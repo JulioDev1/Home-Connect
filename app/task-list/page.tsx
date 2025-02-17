@@ -98,6 +98,21 @@ export default function TaskList(){
     }
 
 
+    function handleSubmitNewForm(event:FormEvent<HTMLFormElement>){
+        event.preventDefault();
+
+        const updatedTable = table.map((item) => {
+            const matchingItem = selectUpdate.find((update) => update.id === item.id);
+            return matchingItem || item;
+        });
+
+        setTable(updatedTable);
+        setSelectUpdate([]);
+        setSelected([]);
+    
+    }
+
+
     console.log(selectUpdate);
 
     return(
@@ -128,6 +143,7 @@ export default function TaskList(){
                     <EditComponent
                         onClick={toggleButton}
                         value={selectUpdate}
+                        handleSubmit={handleSubmitNewForm}
                         handleChange={handleUpdateChanges}
                         toggle={toggle["edit-open"]}
                         dataName="edit-open"
