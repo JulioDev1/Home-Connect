@@ -2,7 +2,7 @@ import Image from "next/image";
 import Delete from "../../public/Trash.png";
 import Edit from "../../public/PencilSimple.png";
 import { Table } from "@/Interface/Table";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 
 
 interface ArrayTable {
@@ -10,6 +10,7 @@ interface ArrayTable {
   handleCheckBoxChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onSelectionChange?: (selectedId: string[]) => void;
   select: string[];
+  // onDelete:(event:MouseEvent<HTMLButtonElement>)=> void;
 }
 export default function TableComponent(prop: ArrayTable) {
 

@@ -53,22 +53,22 @@ export default function EditComponent(props: edit) {
                 />
                 <form onSubmit={props.handleSubmit} className="flex flex-col gap-8" action="">{
                     props.value.map((form, index)=>(
-                    <div key={index}>
-                    {
-                        content.map((i) => (
-                            <Input
-                                name={i.name}
-                                label={i.label}
-                                placeholder={i.placeholder}
-                                type={i.type}
-                                value={form[i.name as keyof typeof form] || ""}
-                                onChange={(e)=> props.handleChange(e, form.id)}
-                            /> 
-                        ))
-                    }
-                    </div>
-                ))}
-                <button className="bg-blue-500 text-white p-2 rounded-md">Submit</button>
+                        <div key={index}>
+                        {
+                            content.map((i) => (
+                                <Input
+                                    name={i.name}
+                                    label={i.label}
+                                    placeholder={i.placeholder}
+                                    type={i.type}
+                                    value={form[i.name as keyof typeof form] || ""}
+                                    onChange={(e)=> props.handleChange(e, form.id)}
+                                /> 
+                            ))
+                        }
+                        </div>
+                    ))}
+                    <button className="bg-blue-500 text-white p-2 rounded-md">Submit</button>
                 </form>
             </div>
         </SideSectionComponent>

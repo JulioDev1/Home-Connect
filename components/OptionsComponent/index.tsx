@@ -18,7 +18,7 @@ export default function OptionComponent(props: IOptionsComponent) {
                     <span className="text-black">( {props.amount} )</span>
                 </button>
 
-                <button className="flex items-center gap-1 text-red-600">
+                <button onClick={props.onClickDelete} className="flex items-center gap-1 text-red-600">
                     <Trash />
                     Delete 
                     <span className="text-red-600"> ( {props.amount} ) </span>
