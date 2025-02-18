@@ -36,7 +36,7 @@ export default function ModalComponent(props: IModalComponent) {
 
                         <button data-name={props.dataName} onClick={props.onClose} className={`${props.amount! > 0 ? `border-gray-200 w-full`
                             :
-                            `bg-black text-white w-1/2`}font-bold rounded-md border  h-11`}>{props.amount! > 0 ? "Cancel" : "Close"
+                            `bg-black text-white w-1/2`}font-bold rounded-md border w-32  h-11`}>{props.amount! > 0 ? "Cancel" : "Close"
                             }
                         </button>
                         <button data-name={props.dataName} onClick={props.onClick} className={props.amount! > 0 ? "bg-rose-600 rounded-md w-full h-11 text-white" : "hidden"}>

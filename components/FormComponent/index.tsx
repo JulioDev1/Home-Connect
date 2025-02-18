@@ -88,9 +88,9 @@ export default function FormComponent(props: IFormComponent) {
 
     return (
         <SideSectionComponent toggle={props.toggle}>
-            <div>
+            <div className="flex flex-col gap-6">
                 <HeaderFormComponent title="UserCreation" dataName={props.dataName} onClick={props.handleClick} />
-                <form className="flex flex-col w-full items-center gap-3" onSubmit={props.handleSubmit}>
+                <form className="flex flex-col  w-full items-center gap-3" onSubmit={props.handleSubmit}>
                     {
                         filterFieldById?.content.map((i, index) =>
                         (

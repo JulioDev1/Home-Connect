@@ -84,6 +84,9 @@ export default function TaskList() {
             const data = { ...prev, [name]: prev[name] ? false : true }
             return data;
         });
+        setSelected([]);
+        setSelectAction([]);
+
     }
 
     function handleAddRowSelected(event: MouseEvent<HTMLButtonElement>) {
@@ -101,14 +104,14 @@ export default function TaskList() {
     }
 
 
-    function handleSubmitNewForm(event: FormEvent<HTMLFormElement>, click?:MouseEvent<HTMLButtonElement>) {
+    function handleSubmitNewForm(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const updatedTable = table.map((item) => {
             const matchingItem = selectAction.find((update) => update.id === item.id);
             return matchingItem || item;
         });
-
+        !toggle["edit-open"];        
         setTable(updatedTable);
         setSelectAction([]);
         setSelected([]);
@@ -122,13 +125,35 @@ export default function TaskList() {
         setSelected([]);
     }
     
+    function UpdateUnique(event:MouseEvent<HTMLButtonElement>){
+        const { id } = event.currentTarget;
+        const selected = table.find((item) => item.id === id);
+        
+        if (!selected) {
+            console.warn(`No item found with id: ${id}`);
+            return;
+        }
+    
+        setSelectAction((prevSelected) => {
+            const isDuplicate = prevSelected.some(item => item.id === selected.id);
+            if (isDuplicate) {
+                return prevSelected;
+            }
+            return [...prevSelected, selected];
+        });
+      
+    }
 
+    console.log(selectAction);
+    function DeleteUnique(event:MouseEvent<HTMLButtonElement>){
+        const {id} =event.currentTarget;
+        console.log(id);
+    }
     return (
         <PageSection>
             <MainContainer>
                 <SideBar onClick={() => router.push("/task-list")} />
                 <MainContent>
-
                     <NavBar
                         amount={table.length}
                         handleChange={handleChange}
@@ -145,9 +170,15 @@ export default function TaskList() {
                         amount={select.length}
                     />
                     <TableComponent
+                        onDeleteUnique={DeleteUnique}
+                        onEditUnique={UpdateUnique}
+                        onOpenDeleteUnique={toggleButton}
+                        onOpenEditUnique={toggleButton}
                         select={select}
                         handleCheckBoxChange={handleCheckBoxChange}
                         data={table}
+                        dataNameDelete="delete-open"
+                        dataNameUpdate="edit-open"
                     />
                 </MainContent>
                 <ModalComponent

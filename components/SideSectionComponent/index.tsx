@@ -8,7 +8,7 @@ export default function SideSectionComponent(props:Side){
             : "hidden"
             
         }  >
-            <div className="relative p-2 h-full w-96  bg-white bg-opacity-100 transition-all duration-300 flex flex-col justify-between">
+            <div className="w-custom  bg-slate-100 gray- bg-opacity-100 transition-all duration-300 p-5 flex flex-col gap-7">
 
                 {props.children}
             </div>

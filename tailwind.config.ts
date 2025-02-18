@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      width: {
+        'custom': '29rem', // Define uma nova largura personalizada
+      }
     },
   },
   plugins: [],
