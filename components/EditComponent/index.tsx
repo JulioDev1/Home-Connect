@@ -68,7 +68,7 @@ export default function EditComponent(props: edit) {
                         }
                         </div>
                     ))}
-                    <button className="bg-blue-500 text-white p-2 rounded-md">Submit</button>
+                    <button onClick={props.onModal} data-name={props.dataNameModal} className="bg-blue-500 text-white p-2 rounded-md">Submit</button>
                 </form>
             </div>
         </SideSectionComponent>

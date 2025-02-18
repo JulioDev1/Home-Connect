@@ -101,7 +101,7 @@ export default function TaskList() {
     }
 
 
-    function handleSubmitNewForm(event: FormEvent<HTMLFormElement>) {
+    function handleSubmitNewForm(event: FormEvent<HTMLFormElement>, click?:MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
         const updatedTable = table.map((item) => {
@@ -154,16 +154,30 @@ export default function TaskList() {
                     amount={select.length}
                     toggle={toggle["delete-open"]}
                     dataName="delete-open"
+                    title={`Delete ${select.length} users`}
+                    description={`Are you sure you want to delete ${select.length} user?`}
                     onClick={handleDelete}
                     onClose={toggleButton}
                     children={<Trash height={20} width={30} />}   
                 />
+                <ModalComponent
+                    amount={selectAction.length}
+                    toggle={toggle["close-modal"]}
+                    dataName="close-modal"
+                    title="User edited Successfully"
+                    onClose={toggleButton}
+                    children={<Complete/>}   
+                />
+
                 <EditComponent
                     onClick={toggleButton}
+                    dataNameModal={"close-modal"}
+                    onModal={toggleButton}
                     value={selectAction}
                     handleSubmit={handleSubmitNewForm}
                     handleChange={handleUpdateChanges}
                     toggle={toggle["edit-open"]}
+                    toggleSucces={toggle["close-modal"]}
                     dataName="edit-open"
                 />
                 <FormComponent
