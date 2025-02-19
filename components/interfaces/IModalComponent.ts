@@ -10,5 +10,4 @@ export interface IModalComponent{
     title?:string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     onClose: (event: MouseEvent<HTMLButtonElement>) => void;
-
 }

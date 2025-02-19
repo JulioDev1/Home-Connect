@@ -22,16 +22,16 @@ export default function TableComponent(prop: ArrayTable) {
   return (
     <table className="border-collapse w-full rounded-lg shadow-md">
       <thead>
-        <tr className=" text-gray-500  bg-white rounded-t-xl text-sm font-medium leading-normal ">
-          <th className="h-7 px-6">
-            <input className="size-4 border border-gray-500 rounded-2xl focus:ring-black" type="checkbox" />
+        <tr className=" text-gray-500   bg-white text-sm font-medium leading-normal">
+          <th className="h-7 text-center px-6 rounded-ss-lg">
+            <input className="size-4 rounded-md focus:ring-black" type="checkbox" />
           </th>
           <th className="h-7 px-6 text-left">Nome & Id</th>
           <th className="h-7 px-6 text-left">Cpf</th>
           <th className="h-7 px-6 text-left">Phone Number</th>
           <th className="h-7 px-6 text-left">Email</th>
           <th className="h-7 px-6 text-left">Location</th>
-          <th className="h-7 px-6 text-center"></th>
+          <th className="h-7 px-6 text-center rounded-e-lg"></th>
         </tr>
       </thead>
       <tbody className="text-gray-600 text-sm font-light">
@@ -41,7 +41,7 @@ export default function TableComponent(prop: ArrayTable) {
               className={`border-b ${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
               key={t.id || index}
             >
-              <td className="h-10 px-6">
+              <td className="h-7 px-6 text-center">
                 <input
                   className="size-4 accent-black"
                   type="checkbox"

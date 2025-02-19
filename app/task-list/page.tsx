@@ -14,6 +14,7 @@ import MainContent from "@/components/MainContent";
 import ModalComponent from "@/components/ModalComponent";
 import Trash from "@/public/Trash";
 import Complete from "@/public/Complete";
+import WarnComponent from "@/components/WarnComponent";
 
 export default function TaskList() {
     const router = useRouter();
@@ -84,9 +85,6 @@ export default function TaskList() {
             const data = { ...prev, [name]: prev[name] ? false : true }
             return data;
         });
-        setSelected([]);
-        setSelectAction([]);
-
     }
 
     function handleAddRowSelected(event: MouseEvent<HTMLButtonElement>) {
@@ -128,7 +126,9 @@ export default function TaskList() {
     function UpdateUnique(event:MouseEvent<HTMLButtonElement>){
         const { id } = event.currentTarget;
         const selected = table.find((item) => item.id === id);
-        
+        setSelected((prev) => select.includes(id)! ? [...prev, id] : prev.filter((item) => item !== id));
+
+        console.log(id);
         if (!selected) {
             console.warn(`No item found with id: ${id}`);
             return;
@@ -140,15 +140,29 @@ export default function TaskList() {
                 return prevSelected;
             }
             return [...prevSelected, selected];
+        });      
+    }
+    function handleDeleteUnique(event:MouseEvent<HTMLButtonElement>){
+        const { id } = event.currentTarget;
+        console.log(id);
+        const selected = table.find((item) => item.id === id);
+        setSelected((prev) => select.includes(id)! ? [...prev, id] : prev.filter((item) => item !== id));
+
+        console.log(id);
+        if (!selected) {
+            console.warn(`No item found with id: ${id}`);
+            return;
+        }
+
+        setSelectAction((prevSelected) => {
+            const isDuplicate = prevSelected.some(item => item.id === selected.id);
+            if (isDuplicate) {
+                return prevSelected;
+            }
+            return [...prevSelected, selected];
         });
-      
     }
 
-    console.log(selectAction);
-    function DeleteUnique(event:MouseEvent<HTMLButtonElement>){
-        const {id} =event.currentTarget;
-        console.log(id);
-    }
     return (
         <PageSection>
             <MainContainer>
@@ -170,7 +184,7 @@ export default function TaskList() {
                         amount={select.length}
                     />
                     <TableComponent
-                        onDeleteUnique={DeleteUnique}
+                        onDeleteUnique={handleDeleteUnique}
                         onEditUnique={UpdateUnique}
                         onOpenDeleteUnique={toggleButton}
                         onOpenEditUnique={toggleButton}
@@ -191,7 +205,7 @@ export default function TaskList() {
                     onClose={toggleButton}
                     children={<Trash height={20} width={30} />}   
                 />
-                <ModalComponent
+                <WarnComponent
                     amount={selectAction.length}
                     toggle={toggle["close-modal"]}
                     dataName="close-modal"

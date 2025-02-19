@@ -8,7 +8,7 @@ export default function ModalComponent(props: IModalComponent) {
             props.toggle ? "w-full h-full z-10 bg-black bg-opacity-5 absolute flex justify-center items-center"
                 : "hidden"
         }>
-            <div className="relative p-4 h-64 w-96 rounded-xl bg-white bg-opacity-100 transition-all duration-300 flex flex-col ">
+            <div className="relative p-6 h-64 w-96 rounded-xl bg-white bg-opacity-100 transition-all duration-300 flex flex-col ">
                 <button data-name={props.dataName} onClick={props.onClose} className="flex justify-end w-full">
                     <Image
                         alt="close"
@@ -18,10 +18,7 @@ export default function ModalComponent(props: IModalComponent) {
                     />
                 </button>
                 <nav className="flex flex-col justify-between h-full items-center">
-                    <span className={`size-14 flex justify-center rounded-xl items-center p-2${props.amount! > 0 ? 
-                        `bg-red-100`: 
-                        `bg-green-100`}`
-                    }>
+                    <span className="size-14 flex justify-center rounded-xl items-center bg-red-100">
                         {props.children}
                     </span>
                     <div className="flex flex-col items-center w-full">
@@ -32,22 +29,26 @@ export default function ModalComponent(props: IModalComponent) {
                             {props.description}
                         </span>
                     </div>
-                    <div className="flex justify-center gap-2 w-full">
+                    <div className="flex justify-center gap-5 w-full">
 
-                        <button data-name={props.dataName} onClick={props.onClose} className={`${props.amount! > 0 ? `border-gray-200 w-full`
-                            :
-                            `bg-black text-white w-1/2`}font-bold rounded-md border w-32  h-11`}>{props.amount! > 0 ? "Cancel" : "Close"
-                            }
+                        <button 
+                            data-name={props.dataName} 
+                            onClick={props.onClose} 
+                            className="border-gray-200  text-black w-1/2 font-bold rounded-lg border h-11"
+                        >
+                            Close
                         </button>
-                        <button data-name={props.dataName} onClick={props.onClick} className={props.amount! > 0 ? "bg-rose-600 rounded-md w-full h-11 text-white" : "hidden"}>
-                            Delete {props.amount} items
+                        <button 
+                            data-name={props.dataName} 
+                            onClick={props.onClick} 
+                            className="border-gray-200 bg-rose-600 text-white w-1/2 font-bold rounded-lg border h-11"
+                        >
+                            Delete {props.amount} user ?
                         </button>
+                       
                     </div>
                 </nav>
             </div>
-
-
-
         </section>
     )
 
