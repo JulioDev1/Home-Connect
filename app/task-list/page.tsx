@@ -109,7 +109,7 @@ export default function TaskList() {
             const matchingItem = selectAction.find((update) => update.id === item.id);
             return matchingItem || item;
         });
-        !toggle["edit-open"];        
+
         setTable(updatedTable);
         setSelectAction([]);
         setSelected([]);
@@ -127,8 +127,8 @@ export default function TaskList() {
         const { id } = event.currentTarget;
         const selected = table.find((item) => item.id === id);
         setSelected((prev) => select.includes(id)! ? [...prev, id] : prev.filter((item) => item !== id));
-
-        console.log(id);
+        
+        console.log(select);
         if (!selected) {
             console.warn(`No item found with id: ${id}`);
             return;
@@ -144,11 +144,10 @@ export default function TaskList() {
     }
     function handleDeleteUnique(event:MouseEvent<HTMLButtonElement>){
         const { id } = event.currentTarget;
-        console.log(id);
         const selected = table.find((item) => item.id === id);
-        setSelected((prev) => select.includes(id)! ? [...prev, id] : prev.filter((item) => item !== id));
+        setSelected((prev) => selected ? [...prev, id] : prev.filter((item) => item !== id));
 
-        console.log(id);
+        console.log(select);
         if (!selected) {
             console.warn(`No item found with id: ${id}`);
             return;
